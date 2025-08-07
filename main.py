@@ -1,18 +1,29 @@
-# todo подключение пользователя
-# todo метод отправки данных
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1.endpoints import (google_sheet_router)
-from contextlib import asynccontextmanager
+from app.api.v1.endpoints import (google_sheet_router, stock_data_router)
 import uvicorn
-from app.config import settings
 
+from app.database.db_connect import init_db, close_db
+from config import settings
+from contextlib import asynccontextmanager
+
+
+# Контекстный менеджер для управления жизненным циклом приложения
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Инициализация пула соединений при старте приложения
+    pool = await init_db()
+    app.state.pool = pool
+    yield
+    # Закрытие пула соединений при завершении работы приложения
+    await close_db(pool)
 
 
 # Создаем экземпляр FastAPI с использованием lifespan
-app = FastAPI(title="1CRoutingAPI")
+app = FastAPI(lifespan=lifespan, title="GoogleSheetAPI")
+
 app.include_router(google_sheet_router, prefix="/api")
+app.include_router(stock_data_router, prefix="/api")
 
 origins = [
     "*",  # временное решение

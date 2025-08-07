@@ -12,17 +12,11 @@ class Settings(BaseSettings):
     INITIAL_SERVICE_TOKEN: str
     TOKEN_HEADER: str = "X-Service-Token"
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    CREDS: str
 
 
 settings: Settings = Settings()
 
 
-
 class GSSettings(BaseSettings):
     pass
-
-
-
-
-
-

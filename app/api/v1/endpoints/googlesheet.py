@@ -1,6 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Depends, status, Body, HTTPException, Query
 
+from app.models import GoogleSheetParams
 
 router = APIRouter(prefix="/googlesheet", tags=["Работа с гугл таблицей"])
 

@@ -5,3 +5,4 @@ pydantic_settings~=2.8.1
 pydantic~=2.11.3
 uvicorn~=0.34.0
 starlette~=0.46.1
+pandas
