@@ -13,7 +13,8 @@ class StockDataRepository:
 
     async def get_all_product_current_balances(self) -> List[StockData]:
         select_query = """
-        SELECT * FROM current_balances;
+        SELECT cb.*, p.name FROM current_balances as cb
+        JOIN products as p ON cb.product_id=p.id;
         """
         async with self.pool.acquire() as conn:
             result = await conn.fetch(select_query)

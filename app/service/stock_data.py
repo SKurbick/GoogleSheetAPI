@@ -27,6 +27,7 @@ class StockDataService:
                 if lvc not in update_data:
                     update_data[lvc] = {}
 
+                update_data[lvc]["Название"] = item.name
                 update_data[lvc]["Свободный остаток"] = item.available_quantity
                 update_data[lvc]["Физ. остаток"] = item.physical_quantity
                 update_data[lvc]["Резерв (ФБС)"] = item.reserved_quantity

@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 class StockData(BaseModel):
     product_id: str
+    name: str
     warehouse_id: int
     reserved_quantity: int
     physical_quantity: int
