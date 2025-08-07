@@ -17,4 +17,4 @@ async def update_stock_data(
         service: StockDataService = Depends(get_stock_data_service)
 ):
     await service.update_stock_data(data)
-    print("OK")
+    return {"status":200, "message": "Успешно"}
